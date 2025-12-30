@@ -28,10 +28,6 @@ test_hier_output.txt
 fatal_error.txt
 run_tests_output.txt
 
-# Specific Development Docs/Notes (开发过程中的临时文档)
-docs/*测试报告.md
-docs/*.txt
-
 # Database
 *.sqlite
 *.db
@@ -50,3 +46,7 @@ Thumbs.db
 node_modules/
 frontend/node_modules/
 frontend/dist/
+
+# Excluded Directories (User Requested)
+docs/
+tests/
