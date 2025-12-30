@@ -1,0 +1,10 @@
+fastapi
+uvicorn[standard]
+sqlalchemy
+aiomysql
+pydantic
+pydantic-settings
+alembic
+python-dotenv
+cryptography
+redis

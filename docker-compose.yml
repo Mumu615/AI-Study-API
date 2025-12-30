@@ -1,0 +1,56 @@
+services:
+  # 数据库服务
+  db:
+    image: mysql:8.0
+    container_name: learning_community_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: learning_community
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+
+  # 缓存服务
+  redis:
+    image: redis:alpine
+    container_name: learning_community_redis
+    restart: always
+    ports:
+      - "6379:6379"
+
+  # 后端 API 服务
+  backend:
+    build: .
+    container_name: learning_community_backend
+    restart: always
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    ports:
+      - "8000:8000"
+    environment:
+      DB_CONNECTION: mysql
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_DATABASE: learning_community
+      DB_USERNAME: user
+      DB_PASSWORD: password
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      SECRET_KEY: change_this_secret_key_in_production
+    # 启动时运行迁移，然后启动应用
+    command: >
+      sh -c "alembic upgrade head && uvicorn my_app.main:app --host 0.0.0.0 --port 8000"
+
+volumes:
+  db_data:

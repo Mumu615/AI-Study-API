@@ -1,0 +1,52 @@
+# Python internals
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+env/
+.venv/
+
+# Environment variables (Sensitive data)
+.env
+.env.*
+
+# IDE & Editor settings
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Testing artifacts & Reports (测试产生的临时文件)
+.pytest_cache/
+.coverage
+htmlcov/
+*.xml
+test_output*.txt
+test_hier_output.txt
+fatal_error.txt
+run_tests_output.txt
+
+# Specific Development Docs/Notes (开发过程中的临时文档)
+docs/*测试报告.md
+docs/*.txt
+
+# Database
+*.sqlite
+*.db
+*.db-journal
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Frontend dependencies and dist
+node_modules/
+frontend/node_modules/
+frontend/dist/
